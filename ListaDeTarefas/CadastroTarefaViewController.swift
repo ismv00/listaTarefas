@@ -13,16 +13,26 @@ class CadastroTarefaViewController: UIViewController {
     
     
     @IBAction func adicionarTarefa(_ sender: Any) {
-        if let textoDigitado = tarefaCampo.text {
-            
-            let tarefa = TarefaUserDefaults()
-            tarefa.salvar(tarefa: textoDigitado)
-            tarefaCampo.text = ""
-            
-            let dados = tarefa.listar()
-            print(dados)
-           
+        if tarefaCampo.text == "" {
+            let alertController = UIAlertController(title: "Tarefa", message: "Por favor, adicione uma tarefa", preferredStyle: .alert)
+            let acaoConfirmar = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(acaoConfirmar)
+            present(alertController , animated: true, completion: nil)
         }
+        else {
+            if let textoDigitado = tarefaCampo.text {
+               
+                let tarefa = TarefaUserDefaults()
+                tarefa.salvar(tarefa: textoDigitado)
+                tarefaCampo.text = ""
+                
+                let dados = tarefa.listar()
+                print(dados)
+               
+            }
+        }
+        
+        
     }
     
     
